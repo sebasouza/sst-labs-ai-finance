@@ -50,7 +50,7 @@ run-%:
 	@set -e; cd $* ; \
 	pwd; \
 	poetry install; \
-	poetry run uvicorn src.$(subst -,_, $*).main:app --reload; \
+	poetry run uvicorn src.$(subst -,_,$*).main:app --reload; \
 	@echo "Backend microservice $* started successfully."
 
 pre-commit: poetry-setup-backend
