@@ -1,0 +1,20 @@
+[MASTER]
+# init-hook='import sys; sys.path.extend(["./venv/lib/python3.13/site-packages", "./src"])'
+ignore = venv,__init__.py
+ignore-patterns=^migrations/.*\.py$,^alembic/versions/.*\.py$
+
+[MESSAGES CONTROL]
+disable =
+    C0116,  # missing-function-docstring
+    R0801,  # similar lines
+    R0903,  # too-few-public-methods
+    W0104,  # Statement seems to have no effect
+
+[FORMAT]
+max-line-length = 120
+
+[REPORTS]
+output-format=colorized
+
+[DESIGN]
+max-parents = 8

@@ -1,0 +1,52 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Optional: coverage directory (if you run tests with coverage)
+coverage/
+
+# Temporary files
+tmp/
+*.tmp
+
+# Python specific
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+*.venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Docker specific
+Dockerfile
+docker-compose.yml
+.dockerignore
+.docker/
+docker-compose.override.yml
+
+# Next.js specific
+.next/
+out/
+
+# React specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
