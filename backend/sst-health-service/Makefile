@@ -81,6 +81,40 @@ test: poetry-install
 	poetry run pytest; \
 	echo "Backend tests completed successfully for $(SERVICE_NAME)."
 
+docker-build:
+	@echo "Building Docker image for $(SERVICE_NAME)..."
+	@set -e; \
+	docker build -t $(SERVICE_NAME) .; \
+	echo "Docker image for $(SERVICE_NAME) built successfully."
+
+docker-run:
+	@echo "Running Docker container for $(SERVICE_NAME)..."
+	@set -e; \
+	docker run -d -p 8000:8000 --name $(SERVICE_NAME) $(SERVICE_NAME); \
+	echo "Docker container for $(SERVICE_NAME) started successfully."
+
+docker-ps:
+	@echo "Showing Docker processes..."
+	@set -e; \
+	docker ps; \
+	echo "Docker processes shown successfully."
+
+docker-logs:
+	@echo "Showing Docker logs for $(SERVICE_NAME)..."
+	@set -e; \
+	docker logs $(SERVICE_NAME); \
+	echo "Docker logs for $(SERVICE_NAME) shown successfully."
+
+docker-stop:
+	@echo "Stopping Docker container for $(SERVICE_NAME)..."
+	@set -e; \
+	if docker ps -q -f name=$(SERVICE_NAME); then \
+		docker stop $(SERVICE_NAME); \
+		echo "Docker container for $(SERVICE_NAME) stopped successfully."; \
+	else \
+		echo "No running container found for $(SERVICE_NAME)."; \
+	fi
+
 # Clean all backend services
 clean:
 	@echo "Cleaning up $(SERVICE_NAME)..."
