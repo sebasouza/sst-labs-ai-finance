@@ -11,7 +11,7 @@ MYPY_CONFIG = ../mypy.ini
 SERVICES=$(shell find . -type d -mindepth 1 -maxdepth 1 -not -path './.*' -exec basename {} \;)
 
 # Targets
-.PHONY: all ensure-poetry poetry-setup-backend backend-% lint test clean help
+.PHONY: all ensure-poetry poetry-setup-backend run-% lint test clean help
 
 # Commands
 all: help
@@ -45,9 +45,12 @@ poetry-setup-backend: ensure-poetry
 	@echo "Poetry setup completed for all services!"
 
 # Run a specific backend service
-backend-%: poetry-setup-backend
+run-%:
 	@echo "Running backend microservice: $*..."
-	@set -e; cd $(BACKEND_DIR)/$* && poetry run uvicorn main:app --reload
+	@set -e; cd $* ; \
+	pwd; \
+	poetry install; \
+	poetry run uvicorn src.$(subst -,_, $*).main:app --reload; \
 	@echo "Backend microservice $* started successfully."
 
 pre-commit: poetry-setup-backend
@@ -107,7 +110,7 @@ help:
 	@echo "  all                       - Show this help message."
 	@echo "  ensure-poetry			   - Ensure Poetry is installed."
 	@echo "  poetry-setup-backend      - Set up Poetry for all services."
-	@echo "  backend-<service>         - Run a specific backend microservice (e.g., make backend_health)."
+	@echo "  run-<service>         - Run a specific backend microservice (e.g., make run-sst-health-service)."
 	@echo "  pre-commit                - Run pre-commit checks for all services."
 	@echo "  lint                      - Run linting for all services."
 	@echo "  test                      - Run tests for all services."
