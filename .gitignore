@@ -1,3 +1,6 @@
+# JetBrains IDE
+.idea/
+
 # Environment variables
 .env
 .env.local
