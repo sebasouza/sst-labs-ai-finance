@@ -1,6 +1,9 @@
 # JetBrains IDE
 .idea/
 
+# vscode
+.vscode/
+
 # Environment variables
 .env
 .env.local
